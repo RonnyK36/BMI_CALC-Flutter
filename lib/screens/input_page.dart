@@ -1,9 +1,11 @@
+import 'package:bmi_calc/screens/results_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'card_content.dart';
-import 'reusable_card.dart';
-import 'constants.dart';
+import '../components/card_content.dart';
+import '../components/reusable_card.dart';
+import '../components/constants.dart';
+import 'calc_formula.dart';
 
 class InputPage extends StatefulWidget {
   @override
@@ -15,6 +17,7 @@ class _InputPageState extends State<InputPage> {
   int? height = 120;
   int weight = 60;
   int age = 20;
+  int result = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -79,7 +82,6 @@ class _InputPageState extends State<InputPage> {
                           'HEIGHT',
                           style: kLabelTextStyle,
                         ),
-
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           textBaseline: TextBaseline.alphabetic,
@@ -102,7 +104,6 @@ class _InputPageState extends State<InputPage> {
                             activeColor: Color(0xFFFEB1555),
                             onChanged: (double newValue) {
                               setState(() {
-                                print(newValue.round());
                                 height = newValue.round();
                               });
                             }),
@@ -126,7 +127,6 @@ class _InputPageState extends State<InputPage> {
                           'WEIGHT',
                           style: kLabelTextStyle,
                         ),
-
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           textBaseline: TextBaseline.alphabetic,
@@ -148,7 +148,7 @@ class _InputPageState extends State<InputPage> {
                             TextButton(
                               onPressed: () {
                                 setState(() {
-                                  if(weight > 3){
+                                  if (weight > 3) {
                                     weight--;
                                   }
                                 });
@@ -187,7 +187,6 @@ class _InputPageState extends State<InputPage> {
                           'AGE',
                           style: kLabelTextStyle,
                         ),
-
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           textBaseline: TextBaseline.alphabetic,
@@ -246,13 +245,28 @@ class _InputPageState extends State<InputPage> {
             color: kBottomContainerColor,
             width: double.infinity,
             height: kBottomContainerHeight,
+            // padding: EdgeInsets.only(bottom: 10),
             child: TextButton(
-              child: Text('Calc BMI',style: TextStyle(
-                color: Colors.white,
-                fontSize: 30,
-              ),),
-              onPressed: (){
-
+              child: Text(
+                'Calc BMI',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 30,
+                ),
+              ),
+              onPressed: () {
+                CalculatorFormula calc =
+                    CalculatorFormula(height: height, weight: weight);
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => ResultsPage(
+                      bmiResults: calc.calculateBMI(),
+                      feedback: calc.getFeedback(),
+                      resultText: calc.getResult(),
+                    ),
+                  ),
+                );
               },
             ),
           ),

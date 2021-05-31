@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 const kActiveCardColor = Color(0xFF1D1E33);
@@ -15,4 +16,9 @@ const kLabelTextStyle = TextStyle(
 const kValueSize = TextStyle(
   fontSize: 50,
   fontWeight: FontWeight.w900,
+);
+const kResultsPageStyle = TextStyle(
+  fontSize: 50,
+  color: Colors.white,
+  fontWeight: FontWeight.bold,
 );
