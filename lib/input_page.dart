@@ -13,12 +13,15 @@ class InputPage extends StatefulWidget {
 class _InputPageState extends State<InputPage> {
   Gender? selectedGender;
   int? height = 120;
+  int weight = 60;
+  int age = 20;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          'BMI CALCULATOR',
+          'BMI CALC',
         ),
       ),
       body: Column(
@@ -76,6 +79,7 @@ class _InputPageState extends State<InputPage> {
                           'HEIGHT',
                           style: kLabelTextStyle,
                         ),
+
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           textBaseline: TextBaseline.alphabetic,
@@ -92,8 +96,8 @@ class _InputPageState extends State<InputPage> {
                           ],
                         ),
                         Slider(
-                            value: height == null ? 120.00 :height!.toDouble(),
-                            min: 120.0,
+                            value: height == null ? 120.00 : height!.toDouble(),
+                            min: 45.0,
                             max: 220.0,
                             activeColor: Color(0xFFFEB1555),
                             onChanged: (double newValue) {
@@ -115,11 +119,123 @@ class _InputPageState extends State<InputPage> {
               children: [
                 Expanded(
                   child: ReusableCard(
+                    cardChild: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          'WEIGHT',
+                          style: kLabelTextStyle,
+                        ),
+
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          textBaseline: TextBaseline.alphabetic,
+                          crossAxisAlignment: CrossAxisAlignment.baseline,
+                          children: [
+                            Text(
+                              weight.toString(),
+                              style: kValueSize,
+                            ),
+                            Text(
+                              'kg',
+                              style: kLabelTextStyle,
+                            ),
+                          ],
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            TextButton(
+                              onPressed: () {
+                                setState(() {
+                                  if(weight > 3){
+                                    weight--;
+                                  }
+                                });
+                              },
+                              child: Icon(
+                                FontAwesomeIcons.minus,
+                                color: Colors.white,
+                              ),
+                            ),
+                            TextButton(
+                              onPressed: () {
+                                setState(() {
+                                  if (weight < 150) {
+                                    weight++;
+                                  }
+                                });
+                              },
+                              child: Icon(
+                                FontAwesomeIcons.plus,
+                                color: Colors.white,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
                     reusableColor: kActiveCardColor,
                   ),
                 ),
                 Expanded(
                   child: ReusableCard(
+                    cardChild: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          'AGE',
+                          style: kLabelTextStyle,
+                        ),
+
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          textBaseline: TextBaseline.alphabetic,
+                          crossAxisAlignment: CrossAxisAlignment.baseline,
+                          children: [
+                            Text(
+                              age.toString(),
+                              style: kValueSize,
+                            ),
+                            Text(
+                              'yrs',
+                              style: kLabelTextStyle,
+                            ),
+                          ],
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            TextButton(
+                              child: Icon(
+                                FontAwesomeIcons.minus,
+                                color: Colors.white,
+                              ),
+                              onPressed: () {
+                                setState(() {
+                                  if (age > 0) {
+                                    age--;
+                                  }
+                                });
+                              },
+                            ),
+                            TextButton(
+                              child: Icon(
+                                FontAwesomeIcons.plus,
+                                color: Colors.white,
+                              ),
+                              onPressed: () {
+                                setState(() {
+                                  if (age < 78) {
+                                    age++;
+                                  }
+                                });
+                              },
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
                     reusableColor: kActiveCardColor,
                   ),
                 ),
@@ -130,9 +246,41 @@ class _InputPageState extends State<InputPage> {
             color: kBottomContainerColor,
             width: double.infinity,
             height: kBottomContainerHeight,
+            child: TextButton(
+              child: Text('Calc BMI',style: TextStyle(
+                color: Colors.white,
+                fontSize: 30,
+              ),),
+              onPressed: (){
+
+              },
+            ),
           ),
         ],
       ),
     );
   }
 }
+//
+// class RoundIconButton extends StatelessWidget {
+//   RoundIconButton({@required this.floatingIcon, this.performOperation});
+//
+//   final IconData? floatingIcon;
+//   final Function? performOperation;
+//
+//   @override
+//   Widget build(BuildContext context) {
+//     return RawMaterialButton(
+//       fillColor: Color(0xFF4C4E5E),
+//       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+//       // shape: CircleBorder(),
+//       constraints: BoxConstraints.tightFor(
+//         width: 50,
+//         height: 50,
+//       ),
+//       elevation: 6,
+//       child: Icon(floatingIcon),
+//       onPressed: performOperation!(),
+//     );
+//   }
+// }

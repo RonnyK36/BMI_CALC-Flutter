@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 
 const kActiveCardColor = Color(0xFF1D1E33);
 const kInactiveCardColor = Color(0xFFF111325);
-const kBottomContainerColor = Colors.pink;
-const kBottomContainerHeight = 70.0;
+const kBottomContainerColor = Colors.green;
+const kBottomContainerHeight = 60.0;
 enum Gender {
   male,
   female,
